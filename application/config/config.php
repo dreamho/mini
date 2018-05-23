@@ -1,5 +1,25 @@
 <?php
+use Illuminate\Database\Capsule\Manager as Capsule;
 
+$capsule = new Capsule;
+
+$capsule->addConnection(array(
+
+    'driver'    => 'mysql',
+    'host'      => '127.0.0.1',
+    'database'  => 'mini',
+    'username'  => 'root',
+    'password'  => 'root',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => ''
+));
+
+// Make this Capsule instance available globally via static methods
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM
+$capsule->bootEloquent();
 /**
  * Configuration
  *
@@ -56,5 +76,6 @@ define('DB_TYPE', 'mysql');
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'mini');
 define('DB_USER', 'root');
-define('DB_PASS', 'your_password');
+define('DB_PASS', 'root');
 define('DB_CHARSET', 'utf8');
+
