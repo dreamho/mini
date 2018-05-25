@@ -1,24 +1,24 @@
 <?php
+
 namespace App\controller;
+
 use JeffOchoa\ValidatorFactory;
 
-class Validator {
+/**
+ * Class Validator
+ * @package App\controller
+ */
+class Validator
+{
+    public $validator;
 
     /**
-     * @var ValidatorFactory
+     * Validates data and returns an array of errors
+     * @param $data
+     * @param $rules
      */
-    private $factory;
-    public $validator;
-//    public function __construct($data, $rules){
-//        $this->validator = new \JeffOchoa\ValidatorFactory();
-//        return $this->validator->make($data, $rules);
-//    }
-//    public function checkUser($data, $rules){
-//        $this->factory = new ValidatorFactory();
-//
-//        return $this->validator = $this->factory->make($data = [], $rules);
-//    }
-    public function check($data, $rules){
+    public function check($data, $rules)
+    {
         $this->validator = new \JeffOchoa\ValidatorFactory();
         return $this->validator->make($data, $rules);
     }

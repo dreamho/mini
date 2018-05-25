@@ -91,6 +91,28 @@ print_r($res->errors()->toArray());
                     @endif
                 </tr>
             @endforeach
+                        {{--var td1 = document.createElement("td");--}}
+                        {{--td1.innerHTML = res[i].id;--}}
+                        {{--var td2 = document.createElement("td");--}}
+                        {{--td2.innerHTML = res[i].artist;--}}
+                        {{--var td3 = document.createElement("td");--}}
+                        {{--td3.innerHTML = res[i].track;--}}
+                        {{--var td4 = document.createElement("td");--}}
+                        {{--td4.innerHTML = res[i].link;--}}
+                        {{--var td5 = document.createElement("td");--}}
+                        {{--td5.innerHTML = "<a onclick='deleteSong(" + res[i].id + ")' href='#'>delete</a>";--}}
+                        {{--var td6 = document.createElement("td");--}}
+                        {{--td6.innerHTML = "<a href='/songs/editsong/"+ res[i].id +"'>edit</a>";--}}
+
+                        {{--tr.appendChild(td1);--}}
+                        {{--tr.appendChild(td2);--}}
+                        {{--tr.appendChild(td3);--}}
+                        {{--tr.appendChild(td4);--}}
+                        {{--@if($status=='admin')--}}
+                        {{--tr.appendChild(td5);--}}
+                        {{--tr.appendChild(td6);--}}
+                        {{--@endif--}}
+                        {{--tbody.appendChild(tr);--}}
 
 
 */

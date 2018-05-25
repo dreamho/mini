@@ -1,12 +1,23 @@
 <?php
+
 namespace App\core;
+
 use Illuminate\Routing\Router;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Route {
-    public static function set(){
+/**
+ * Class Route
+ * @package App\core
+ */
+class Route
+{
+    /**
+     * Setting routes and redirecting if route does not exists
+     */
+    public static function set()
+    {
         $dispatcher = new Dispatcher;
         $router = new Router($dispatcher);
 
@@ -36,14 +47,18 @@ class Route {
             $router->get('auth/logout', 'App\controller\Auth@logout');
 
             // Api Controller Routes
-            $router->get('api/getsongs', 'App\api\Songsapi@getSongs');
+            $router->get('songsapi/getsongs', 'App\api\Songsapi@getSongs');
+            $router->post('songsapi/savesong', 'App\api\Songsapi@saveSong');
+            $router->get('songsapi/deletesong/{id}', 'App\api\Songsapi@deleteSong');
+            $router->get('songsapi/getbyid/{id}', 'App\api\Songsapi@getById');
+            $router->post('songsapi/editsong', 'App\api\Songsapi@editSong');
 
             $request = Request::createFromGlobals();
             $response = $router->dispatch($request);
             $response->send();
 
-        } catch(\Exception $e){
-           //echo $e->getMessage();
+        } catch (\Exception $e) {
+            //echo $e->getMessage();
             redirect('problem');
         }
     }

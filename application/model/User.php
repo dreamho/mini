@@ -1,6 +1,11 @@
 <?php
 namespace App\model;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+
+/**
+ * Class User
+ * @package App\model
+ */
 class User extends Eloquent
 {
     protected $table = 'users';
