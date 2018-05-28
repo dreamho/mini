@@ -32,5 +32,10 @@ class Controller
             echo $this->blade->make($view);
         }
     }
+    public function response(){
+        $response = $this->item = new Response();
+        $response = $this->collection = new Response();
+        return $response;
+    }
 
 }

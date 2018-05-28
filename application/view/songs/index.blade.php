@@ -109,11 +109,12 @@
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var message = JSON.parse(this.responseText);
-                    if(message.hasOwnProperty("artist", "track", "link")) {
-                        showErrors(message);
-                    }else {
-                        msg.innerHTML = message;
-                    }
+                    // if(message.hasOwnProperty("artist", "track", "link")) {
+                    //     showErrors(message);
+                    // }else {
+                    //     msg.innerHTML = message.message;
+                    // }
+                    msg.innerHTML = message.message;
                     form.artist.value = "";
                     form.track.value = "";
                     form.link.value = "";
@@ -134,7 +135,7 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
-                    var song = JSON.parse(this.responseText);
+                    var song = JSON.parse(this.responseText).data;
                     var form = document.forms[1];
                     form.id.value = song.id;
                     form.artist.value = song.artist;
@@ -161,7 +162,7 @@
                     if(message.hasOwnProperty("artist", "track", "link")) {
                         showErrors(message);
                     }else {
-                        msg.innerHTML = message;
+                        msg.innerHTML = message.message;
                     }
 
                     form.artist.value = "";
@@ -184,7 +185,7 @@
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
-                    var songs = JSON.parse(this.responseText);
+                    var songs = JSON.parse(this.responseText).data;
 
                     for (var i = 0; i < songs.length; i++) {
 

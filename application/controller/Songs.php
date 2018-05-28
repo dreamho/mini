@@ -144,14 +144,11 @@ class Songs extends Controller
 //     * AJAX-ACTION: ajaxGetStats
 //     * TODO documentation
 //     */
-//    public function ajaxGetStats()
-//    {
-//        //Database::getConnection();
-//        //$amount_of_songs = $this->model->getAmountOfSongs();
-//        $amount_of_songs = Song::count();
-//
-//        // simply echo out something. A supersimple API would be possible by echoing JSON here
-//        echo $amount_of_songs;
-//    }
+    public function ajaxGetStats()
+    {
+        $amount_of_songs = Song::count();
+
+        echo $amount_of_songs;
+    }
 
 }

@@ -7,9 +7,9 @@
  */
 
 namespace App\Transformer;
-
+use Illuminate\Database\Eloquent\Model;
 
 interface TransformerInterface
 {
-    function transformer($data);
+    function transformer(Model $model);
 }

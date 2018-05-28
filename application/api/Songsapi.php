@@ -25,7 +25,8 @@ class Songsapi extends Controller
     public function getSongs()
     {
         $songs = Song::all();
-        return new JsonResponse($songs, 200);
+        return $this->response()->collection($songs, new SongTransformer());
+        //return new JsonResponse($songs, 200);
     }
 
     /**
@@ -59,8 +60,10 @@ class Songsapi extends Controller
             $model->track = $request->track;
             $model->link = $request->link;
             $model->save();
-
-            return new JsonResponse("Song has been saved successfully");
+            $song = Song::find($model->id);
+            $message = "Saved";
+            return $this->response()->item($song, new SongTransformer(), $message);
+            //return new JsonResponse("Song has been saved successfully");
         } catch (\Exception $exception) {
             // throw new InvalidResourceException($exception->getMessage(), $exception->getCode());
             return new JsonResponse("Something goes wrong", 400);
@@ -78,6 +81,7 @@ class Songsapi extends Controller
             Song::destroy($id);
             $data = "Song has been deleted successfully.";
             return new JsonResponse($data);
+
         }
     }
 
@@ -90,8 +94,9 @@ class Songsapi extends Controller
     {
         if (isset($id)) {
             $song = Song::find($id);
+            return $this->response()->item($song, new SongTransformer());
         }
-        return new JsonResponse($song);
+        //return new JsonResponse($song);
     }
 
     /**
@@ -125,10 +130,12 @@ class Songsapi extends Controller
             $model->track = $song->track;
             $model->link = $song->link;
             $model->save();
-            return new JsonResponse("Song has been updated successfully.");
+            $song = Song::find($model->id);
+            $message = "Updated";
+            return $this->response()->item($song, new SongTransformer(), $message);
+            //return new JsonResponse("Song has been updated successfully.");
         } catch (\Exception $exception) {
             return new JsonResponse("Something goes wrong");
         }
     }
-
 }
