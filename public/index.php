@@ -1,8 +1,8 @@
 <?php
-use App\core\Application;
-use App\controller\Home;
-use App\core\Route;
-use App\controller\Validator;
+use App\Core\Application;
+use App\Controller\Home;
+use App\Core\Route;
+use App\Controller\Validator;
 /**
  * MINI - an extremely simple naked PHP application
  *
@@ -57,8 +57,9 @@ if (file_exists(ROOT . 'vendor/autoload.php')) {
 //    }
 //});
 // load application config (error reporting etc.)
-require APP . 'config/config.php';
+require ROOT . 'config/config.php';
 //echo URL;
+//echo ROOT;
 // FOR DEVELOPMENT: this loads PDO-debug, a simple function that shows the SQL query (when using PDO).
 // If you want to load pdoDebug via Composer, then have a look here: https://github.com/panique/pdo-debug
 //require APP . 'libs/helper.php';

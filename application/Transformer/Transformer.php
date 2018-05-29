@@ -7,8 +7,9 @@
  */
 
 namespace App\Transformer;
+
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\JsonResponse;
+
 /**
  * Class Transformer
  * @package App\Transformer
@@ -16,12 +17,10 @@ use Illuminate\Http\JsonResponse;
 abstract class Transformer implements TransformerInterface
 {
     /**
-     *
-     * @param $data
-     * @return JsonResponse
+     * Transform data from the Model
+     * @param Model $model
      */
-    function transformer(Model $model)
+    public function transformer(Model $model)
     {
-        //return new JsonResponse(['data' => $data]);
     }
 }

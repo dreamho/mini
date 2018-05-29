@@ -7,9 +7,14 @@
  */
 
 namespace App\Transformer;
+
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Interface TransformerInterface
+ * @package App\Transformer
+ */
 interface TransformerInterface
 {
-    function transformer(Model $model);
+    public function transformer(Model $model);
 }

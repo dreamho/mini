@@ -8,14 +8,20 @@
 
 namespace App\Transformer;
 
-use App\Transformer\Transformer;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\Model;
-use App\model\Song;
 
+/**
+ * Class SongTransformer
+ * @package App\Transformer
+ */
 class SongTransformer extends Transformer
 {
-    function transformer(Model $song)
+    /**
+     * Transform data from the Model Song in appropriate format
+     * @param Model $song
+     * @return array
+     */
+    public function transformer(Model $song)
     {
         return [
             'id' => $song->id,
