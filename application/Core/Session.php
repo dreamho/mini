@@ -24,6 +24,7 @@ class Session
      * Starting a session if neccessary and getting a value from $_SESSION
      * @param $k - Session key
      * @param null $default - returns null if key does not exists
+     * @return
      */
     public static function get($k, $default = null)
     {
