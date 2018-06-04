@@ -21,10 +21,10 @@
 
 <!-- navigation -->
 <div class="navigation">
-    <a href="<?php echo URL; ?>">home</a>
-    <a href="<?php echo URL; ?>home/exampleone">subpage</a>
-    <a href="<?php echo URL; ?>home/exampletwo">subpage 2</a>
-    <a href="<?php echo URL; ?>songs">songs</a>
+    <a href="/">home</a>
+    <a href="home/exampleone">subpage</a>
+    <a href="home/exampletwo">subpage 2</a>
+    <a href="songs">songs</a>
     <div class="auth">
         <?php
         if (session_status() == PHP_SESSION_NONE) {

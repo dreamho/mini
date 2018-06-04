@@ -119,6 +119,12 @@
                         td.innerHTML = result.data[j];
                         tr.appendChild(td);
                     }
+                    var del = document.createElement("td");
+                    var edit = document.createElement("td");
+                    del.innerHTML = "<a onclick='deleteSong(" + result.data.id + ")' href='#'>delete</a>";
+                    edit.innerHTML = "<a onclick='editForm(" + result.data.id + ")' href='#'>edit</a>";
+                    tr.appendChild(del);
+                    tr.appendChild(edit);
                     tbody.appendChild(tr);
                     clearMsg();
                 }
