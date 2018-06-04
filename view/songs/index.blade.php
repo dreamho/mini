@@ -3,11 +3,8 @@
 
 @section('content')
     <div class="container">
-        <div><h2><span id="msg" style="color:green"></span></h2></div>
-        <div><h2><span id="error" style="color:red"></span></h2></div>
-        <h2>You are in the View: application/view/song/index.php (everything in this box comes from that file)</h2>
+        <div><h2><span id="msg"></span></h2></div>
         <!-- add song form -->
-
 
         @if(($status=='admin')||($status=='user'))
             <div class="box">
@@ -81,7 +78,6 @@
         var tbody = document.getElementById('rows');
         var edit_form = document.getElementById('edit_form');
         var msg = document.getElementById('msg');
-        var err = document.getElementById('error');
 
         // Delete song
         function deleteSong(id) {
@@ -111,25 +107,31 @@
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var result = JSON.parse(this.responseText);
-                    for(var i=0;i<result.message.length;i++){
-                        err.innerHTML += result.message[i];
+                    if(Array.isArray(result.message)){
+                        for(var i=0;i<result.message.length;i++){
+                            msg.innerHTML += result.message[i] + "<br>";
+                        }
+                    }else{
+                        msg.innerHTML = result.message;
                     }
                     form.artist.value = "";
                     form.track.value = "";
                     form.link.value = "";
                     var tr = document.createElement('tr');
-                    for(var j in result.data){
-                        var td = document.createElement('td');
-                        td.innerHTML = result.data[j];
-                        tr.appendChild(td);
+                    if(result.data){
+                        for(var j in result.data){
+                            var td = document.createElement('td');
+                            td.innerHTML = result.data[j];
+                            tr.appendChild(td);
+                        }
+                        var del = document.createElement("td");
+                        var edit = document.createElement("td");
+                        del.innerHTML = "<a onclick='deleteSong(" + result.data.id + ")' href='#'>delete</a>";
+                        edit.innerHTML = "<a onclick='editForm(" + result.data.id + ")' href='#'>edit</a>";
+                        tr.appendChild(del);
+                        tr.appendChild(edit);
+                        tbody.appendChild(tr);
                     }
-                    var del = document.createElement("td");
-                    var edit = document.createElement("td");
-                    del.innerHTML = "<a onclick='deleteSong(" + result.data.id + ")' href='#'>delete</a>";
-                    edit.innerHTML = "<a onclick='editForm(" + result.data.id + ")' href='#'>edit</a>";
-                    tr.appendChild(del);
-                    tr.appendChild(edit);
-                    tbody.appendChild(tr);
                     clearMsg();
                 }
             }
@@ -170,8 +172,13 @@
             xhr.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     var response = JSON.parse(this.responseText);
-                    for(var i=0;i<response.message.length;i++){
-                        err.innerHTML += response.message[i];
+                    console.log(response);
+                    if(Array.isArray(response.message)){
+                        for(var i=0;i<response.message.length;i++){
+                            msg.innerHTML += response.message[i] + "<br>";
+                        }
+                    }else{
+                        msg.innerHTML = response.message;
                     }
                     form.artist.value = "";
                     form.track.value = "";
@@ -208,13 +215,11 @@
                                 @if($status=='admin')
                         var del = document.createElement("td");
                         var edit = document.createElement("td");
-                        // var obj = res[i];
                         del.innerHTML = "<a onclick='deleteSong(" + songs[i].id + ")' href='#'>delete</a>";
                         edit.innerHTML = "<a onclick='editForm(" + songs[i].id + ")' href='#'>edit</a>";
                         tr.appendChild(del);
                         tr.appendChild(edit);
                         @endif
-                        //tr.setAttribute('id', $songs[i].id);
                         tbody.appendChild(tr);
                     }
                 }
@@ -223,22 +228,10 @@
             xhr.send();
         }
 
-        // Show errors after validation
-        function showErrors(message){
-            msg.innerHTML = "";
-            for(var i in message){
-                for(var j=0;j<message[i].length;j++){
-                    msg.innerHTML += message[i][j] + "<br>";
-                }
-            }
-        }
-
-
         // Clear message
         function clearMsg(){
             setTimeout(function () {
                 msg.innerHTML = "";
-                err.innerHTML = "";
             }, 3000);
         }
 

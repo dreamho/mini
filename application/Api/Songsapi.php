@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Controller\Validator;
 use App\Core\Controller;
 use App\Model\Song;
+use App\Requests\SongRequest;
 use App\Transformer\SongTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,18 +35,8 @@ class Songsapi extends Controller
     {
         $request = Request::capture();
 
-        $data = [];
-        $data['artist'] = $request->artist;
-        $data['track'] = $request->track;
-        $data['link'] = $request->link;
-
-        $rules = [
-            'artist' => 'required',
-            'track' => 'required',
-            'link' => 'required',
-        ];
-        $validator = new Validator();
-        $res = $validator->check($data, $rules);
+        $validator = new SongRequest();
+        $res = $validator->check($request);
         $errors = $res->errors()->toArray();
         $messages = [];
         if (count($errors) > 0) {
@@ -67,7 +58,8 @@ class Songsapi extends Controller
             $message = "Song has been saved successfully";
             return $this->response->item($model, new SongTransformer(), $message);
         } catch (\Exception $exception) {
-            return new JsonResponse("Something goes wrong", 400);
+            $message = ["message" => "Something goes wrong"];
+            return new JsonResponse($message, 400);
         }
     }
 
@@ -79,14 +71,14 @@ class Songsapi extends Controller
     public function deleteSong($id)
     {
         if (!is_numeric($id)) {
-            return new JsonResponse('Invalid ID');
+            return new JsonResponse(['message' => 'Invalid ID']);
         }
         try {
             Song::destroy($id);
             $message = "Song has been deleted successfully.";
             return new JsonResponse($message);
         } catch (\Exception $exception) {
-            $message = 'Something goes wrong';
+            $message = ["message" => "Something goes wrong"];
             return new JsonResponse($message);
         }
     }
@@ -98,10 +90,11 @@ class Songsapi extends Controller
      */
     public function getById($id)
     {
-        if (isset($id)) {
-            $song = Song::find($id);
-            return $this->response->item($song, new SongTransformer());
+        if (!isset($id)) {
+            return new JsonResponse(['message' => 'Invalid ID']);
         }
+        $song = Song::find($id);
+        return $this->response->item($song, new SongTransformer());
     }
 
     /**
@@ -110,40 +103,32 @@ class Songsapi extends Controller
      */
     public function editSong()
     {
-        $song = Request::capture();
+        $request = Request::capture();
 
-        $data = [];
-        $data['artist'] = $song->artist;
-        $data['track'] = $song->track;
-        $data['link'] = $song->link;
-
-        $rules = [
-            'artist' => 'required',
-            'track' => 'required',
-            'link' => 'required',
-        ];
-        $validator = new Validator();
-        $res = $validator->check($data, $rules);
+        $validator = new SongRequest();
+        $res = $validator->check($request);
         $errors = $res->errors()->toArray();
+        $messages = [];
         if (count($errors) > 0) {
             foreach ($errors as $error) {
                 foreach ($error as $value) {
                     $messages[] = $value;
                 }
-                $errors = ['message' => $messages];
-                return new JsonResponse($errors);
             }
+            $errors = ['message' => $messages];
+            return new JsonResponse($errors);
         }
         try {
-            $model = Song::find($song->id);
-            $model->artist = $song->artist;
-            $model->track = $song->track;
-            $model->link = $song->link;
+            $model = Song::find($request->id);
+            $model->artist = $request->artist;
+            $model->track = $request->track;
+            $model->link = $request->link;
             $model->save();
             $message = "Song has been updated successfully";
             return $this->response->item($model, new SongTransformer(), $message);
         } catch (\Exception $exception) {
-            return new JsonResponse("Something goes wrong");
+            $message = ["message" => "Something goes wrong"];
+            return new JsonResponse($message);
         }
     }
 }

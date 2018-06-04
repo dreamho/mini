@@ -2,20 +2,19 @@
 
 namespace App\Controller;
 
-use JeffOchoa\ValidatorFactory;
-
 /**
  * Class Validator
  * @package App\controller
  */
 class Validator
 {
-    public $validator;
+    //public $validator;
 
     /**
      * Validates data and returns an array of errors
      * @param $data
      * @param $rules
+     * @return array
      */
     public function check($data, $rules)
     {

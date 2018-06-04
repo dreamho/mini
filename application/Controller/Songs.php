@@ -36,7 +36,7 @@ class Songs extends Controller
     }
 
     /**
-     *
+     * Returns sum of songs
      */
     public function ajaxGetStats()
     {

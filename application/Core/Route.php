@@ -5,7 +5,6 @@ namespace App\Core;
 use Illuminate\Routing\Router;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class Route
@@ -64,6 +63,11 @@ class Route
             $response->send();
         }
     }
+
+    /**
+     * Redirection
+     * @param $route
+     */
     public static function redirection($route){
         $request = $router->getCurrentRequest();
         $router->redirect($request->getRequestUri(), URL . $route);

@@ -88,14 +88,14 @@ class Auth extends Controller
         if (count($errors) > 0) {
             Session::set('errors', $errors);
 
-            return redirect('auth/loginform');
+            redirect('auth/loginform');
         }
 
         $user = User::where('email', $_POST['email'])->where('password', md5($_POST['password']))->first();
         if ($user) {
             Session::set('name', $user->name);
             Session::set('status', $user->status);
-            return redirect('songs');
+            redirect('songs');
         }
 
             Session::set('message', "Something goes wrong, try again!");
