@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Core\Controller;
 use App\Core\Session;
-use App\Model\Database;
 use App\Model\User;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class Auth
@@ -23,8 +21,7 @@ class Auth extends Controller
         if ($errors != null) {
             Session::destroy('errors');
         }
-
-        $this->view('auth/register', ['errors' => $errors]);
+        echo $this->blade->make('auth/register', ['errors' => $errors]);
     }
 
     /**
@@ -44,8 +41,8 @@ class Auth extends Controller
         $errors = $res->errors()->toArray();
         if (count($errors) > 0) {
             Session::set('errors', $errors);
-
-            return redirect('auth/registerform');
+            //echo $this->blade->make('auth/register');
+            redirect('auth/registerform');
         }
         $user = new User;
         $user->name = $_POST['name'];
@@ -55,6 +52,7 @@ class Auth extends Controller
         $status = User::find($user->id)->status;
         Session::set('name', $user->name);
         Session::set('status', $status);
+        //return $this->view('/');
         redirect('home');
     }
 
@@ -71,7 +69,7 @@ class Auth extends Controller
         if ($message != null) {
             Session::destroy('message');
         }
-        $this->view('auth/login', ['errors' => $errors, 'message' => $message]);
+        echo $this->blade->make('auth/login', ['errors' => $errors, 'message' => $message]);
     }
 
     /**
@@ -109,6 +107,6 @@ class Auth extends Controller
      */
     public function logout()
     {
-        $this->view('auth/logout');
+        echo $this->blade->make('auth/logout');
     }
 }

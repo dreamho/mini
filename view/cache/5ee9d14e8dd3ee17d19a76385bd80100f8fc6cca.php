@@ -22,9 +22,9 @@
 <!-- navigation -->
 <div class="navigation">
     <a href="/">home</a>
-    <a href="home/exampleone">subpage</a>
-    <a href="home/exampletwo">subpage 2</a>
-    <a href="songs">songs</a>
+    <a href="<?php echo e(URL); ?>home/exampleone">subpage</a>
+    <a href="<?php echo e(URL); ?>home/exampletwo">subpage 2</a>
+    <a href="<?php echo e(URL); ?>songs">songs</a>
     <div class="auth">
         <?php
         if (session_status() == PHP_SESSION_NONE) {

@@ -2,7 +2,7 @@
 
 @section('content')
     <hr>
-    @if(!empty($errors)){
+    @if(!empty($errors))
         <ul>
         @foreach($errors as $error)
             @foreach($error as $value)
@@ -13,7 +13,7 @@
     @endif
     <form method="POST" action="{{URL}}auth/register">
         <label>Name:</label><br>
-        <input autofocus type="text" name="name" required /><br><br>
+        <input autofocus type="text" name="name" /><br><br>
         <label>Email</label><br>
         <input type="text" name="email" /><br><br>
         <label>Password</label><br>

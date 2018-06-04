@@ -65,7 +65,7 @@ class Songsapi extends Controller
             $model->link = $request->link;
             $model->save();
             $song = Song::find($model->id);
-            $message = "Saved";
+            $message = "Song has been saved successfully";
             return $this->response->item($song, new SongTransformer(), $message);
         } catch (\Exception $exception) {
             return new JsonResponse("Something goes wrong", 400);
@@ -142,7 +142,7 @@ class Songsapi extends Controller
             $model->link = $song->link;
             $model->save();
             $song = Song::find($model->id);
-            $message = "Updated";
+            $message = "Song has been updated successfully";
             return $this->response->item($song, new SongTransformer(), $message);
         } catch (\Exception $exception) {
             return new JsonResponse("Something goes wrong");

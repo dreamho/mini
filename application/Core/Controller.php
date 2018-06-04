@@ -33,4 +33,5 @@ class Controller
             echo $this->blade->make($view);
         }
     }
+
 }

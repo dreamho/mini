@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <div class="container">
         <div><h2><span id="msg" style="color:green"></span></h2></div>
+        <div><h2><span id="error" style="color:red"></span></h2></div>
         <h2>You are in the View: application/view/song/index.php (everything in this box comes from that file)</h2>
         <!-- add song form -->
 
@@ -78,6 +79,7 @@
         var tbody = document.getElementById('rows');
         var edit_form = document.getElementById('edit_form');
         var msg = document.getElementById('msg');
+        var err = document.getElementById('error');
 
         // Delete song
         function deleteSong(id) {
@@ -108,7 +110,7 @@
                 if (this.readyState == 4) {
                     var result = JSON.parse(this.responseText);
                     for(var i=0;i<result.message.length;i++){
-                        msg.innerHTML += result.message[i];
+                        err.innerHTML += result.message[i];
                     }
                     form.artist.value = "";
                     form.track.value = "";
@@ -167,7 +169,7 @@
                 if (this.readyState == 4) {
                     var response = JSON.parse(this.responseText);
                     for(var i=0;i<response.message.length;i++){
-                        msg.innerHTML += response.message[i];
+                        err.innerHTML += response.message[i];
                     }
                     form.artist.value = "";
                     form.track.value = "";
@@ -234,6 +236,7 @@
         function clearMsg(){
             setTimeout(function () {
                 msg.innerHTML = "";
+                err.innerHTML = "";
             }, 3000);
         }
 

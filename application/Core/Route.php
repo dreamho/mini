@@ -64,4 +64,10 @@ class Route
             $response->send();
         }
     }
+    public static function redirection($route){
+        $request = $router->getCurrentRequest();
+        $router->redirect($request->getRequestUri(), URL . $route);
+        $response = $router->dispatch($request);
+        $response->send();
+    }
 }

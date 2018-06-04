@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
     <hr>
-    <?php if(!empty($errors)): ?>{
+    <?php if(!empty($errors)): ?>
         <ul>
         <?php $__currentLoopData = $errors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php $__currentLoopData = $error; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -11,7 +11,7 @@
     <?php endif; ?>
     <form method="POST" action="<?php echo e(URL); ?>auth/register">
         <label>Name:</label><br>
-        <input autofocus type="text" name="name" required /><br><br>
+        <input autofocus type="text" name="name" /><br><br>
         <label>Email</label><br>
         <input type="text" name="email" /><br><br>
         <label>Password</label><br>

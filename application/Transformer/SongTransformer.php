@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class SongTransformer
  * @package App\Transformer
  */
-class SongTransformer extends Transformer
+class SongTransformer implements TransformerInterface
 {
     /**
      * Transform data from the Model Song in appropriate format
