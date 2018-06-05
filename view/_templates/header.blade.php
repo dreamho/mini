@@ -33,10 +33,10 @@
         ?>
         @if(isset($_SESSION['name']))
             <span>Hello {{$_SESSION['name']}}</span>
-            <a href='{{URL}}auth/logout'>logout</a>
+            <a href='{{URL}}logout'>logout</a>
         @else
-            <a href='{{URL}}auth/registerform'>register</a>
-            <a href='{{URL}}auth/loginform'>login</a>
+            <a href='{{URL}}register'>register</a>
+            <a href='{{URL}}login'>login</a>
         @endif
     </div>
 </div>

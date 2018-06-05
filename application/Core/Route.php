@@ -39,11 +39,11 @@ class Route
             $router->get('songs/ajaxGetStats', 'App\Controller\Songs@ajaxGetStats');
 
             // Auth Controller Routes
-            $router->get('auth/registerform', 'App\Controller\Auth@registerForm');
-            $router->post('auth/register', 'App\Controller\Auth@register');
-            $router->get('auth/loginform', 'App\Controller\Auth@loginForm');
-            $router->post('auth/login', 'App\Controller\Auth@login');
-            $router->get('auth/logout', 'App\Controller\Auth@logout');
+            $router->get('register', 'App\Controller\Auth@registerForm');
+            $router->post('register', 'App\Controller\Auth@register');
+            $router->get('login', 'App\Controller\Auth@loginForm');
+            $router->post('login', 'App\Controller\Auth@login');
+            $router->get('logout', 'App\Controller\Auth@logout');
 
             // Api Controller Routes
             $router->get('songsapi/getsongs', 'App\Api\Songsapi@getSongs');
@@ -69,6 +69,8 @@ class Route
      * @param $route
      */
     public static function redirection($route){
+        $dispatcher = new Dispatcher;
+        $router = new Router($dispatcher);
         $request = $router->getCurrentRequest();
         $router->redirect($request->getRequestUri(), URL . $route);
         $response = $router->dispatch($request);

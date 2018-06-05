@@ -41,8 +41,7 @@ class Auth extends Controller
         $errors = $res->errors()->toArray();
         if (count($errors) > 0) {
             Session::set('errors', $errors);
-            //echo $this->blade->make('auth/register');
-            redirect('auth/registerform');
+            return redirect('register');
         }
         $user = new User;
         $user->name = $_POST['name'];
@@ -52,8 +51,7 @@ class Auth extends Controller
         $status = User::find($user->id)->status;
         Session::set('name', $user->name);
         Session::set('status', $status);
-        //return $this->view('/');
-        redirect('home');
+        return redirect('home');
     }
 
     /**
@@ -87,8 +85,7 @@ class Auth extends Controller
         $errors = $res->errors()->toArray();
         if (count($errors) > 0) {
             Session::set('errors', $errors);
-
-            redirect('auth/loginform');
+            return redirect('login');
         }
 
         $user = User::where('email', $_POST['email'])->where('password', md5($_POST['password']))->first();
@@ -97,9 +94,8 @@ class Auth extends Controller
             Session::set('status', $user->status);
             redirect('songs');
         }
-
-            Session::set('message', "Something goes wrong, try again!");
-            redirect('auth/loginform');
+            Session::set('message', "Email or password are incorrect!");
+            return redirect('login');
     }
 
     /**

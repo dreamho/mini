@@ -13,12 +13,12 @@
         @endforeach
         </ul>
     @endif
-    <form method="POST" action="{{URL}}auth/login">
+    <form method="POST" action="{{URL}}login">
 
         <label>Email</label><br>
         <input type="text" name="email" /><br><br>
         <label>Password</label><br>
-        <input type="input" name="password" /><br><br>
+        <input type="password" name="password" /><br><br>
         <input type="submit" name="submit_login_user" value="Login" />
 
     </form>
